@@ -4,9 +4,11 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 // Database connection
 const db = mysql.createConnection({
@@ -24,7 +26,7 @@ db.connect(err => {
 // Auth route
 app.post('/login', (req, res) => {
     const { login, password } = req.body;
-    const sql = 'SELECT * FROM Users WHERE login = ?';
+    const sql = 'SELECT * FROM Users WHERE username = ?';
     db.query(sql, [login], (err, result) => {
         if (err) throw err;
         if (result.length > 0) {
