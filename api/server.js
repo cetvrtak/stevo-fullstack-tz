@@ -56,7 +56,7 @@ const authenticateToken = (req, res, next) => {
 
 // Client routes
 app.get('/clients', authenticateToken, (req, res) => {
-    const sql = 'SELECT * FROM Clients WHERE responsible_full_name = (SELECT full_name FROM Users WHERE id = ?)';
+    const sql = 'SELECT * FROM Clients WHERE responsible_full_name = (SELECT name FROM Users WHERE id = ?)';
     db.query(sql, [req.user.id], (err, result) => {
         if (err) throw err;
         res.json(result);

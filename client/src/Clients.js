@@ -6,7 +6,7 @@ const Clients = ({ token }) => {
 
     useEffect(() => {
         const fetchClients = async () => {
-            const res = await axios.get('/clients', {
+            const res = await axios.get('http://localhost:5000/clients', {
                 headers: {
                     'Authorization': token
                 }
@@ -19,7 +19,7 @@ const Clients = ({ token }) => {
 
     const handleChangeStatus = async (account_number, status) => {
         try {
-            await axios.patch(`/clients/${account_number}`, { status }, {
+            await axios.patch(`http://localhost:5000/clients/${account_number}`, { status }, {
                 headers: {
                     'Authorization': token
                 }
