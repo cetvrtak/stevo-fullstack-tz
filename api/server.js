@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 
@@ -31,14 +30,12 @@ app.post('/login', (req, res) => {
         if (err) throw err;
         if (result.length > 0) {
             const user = result[0];
-            bcrypt.compare(password, user.password, (err, isMatch) => {
-                if (isMatch) {
-                    const token = jwt.sign({ id: user.id }, 'your_jwt_secret');
-                    res.json({ token });
-                } else {
-                    res.status(401).json({ msg: 'Invalid credentials' });
-                }
-            });
+            if (password === user.password) {
+                const token = jwt.sign({ id: user.id }, 'your_jwt_secret');
+                res.json({ token });
+            } else {
+                res.status(401).json({ msg: 'Invalid credentials' });
+            }
         } else {
             res.status(401).json({ msg: 'Invalid credentials' });
         }
