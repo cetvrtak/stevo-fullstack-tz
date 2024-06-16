@@ -38,6 +38,23 @@ function initializeDatabase() {
                     throw err;
                 }
                 console.log('Users table created or already exists');
+
+                // Insert sample data into Users table
+                const users = [
+                    { name: 'John Doe', username: 'johndoe', password: 'password1' },
+                    { name: 'Jane Smith', username: 'janesmith', password: 'password2' },
+                    { name: 'Alice Johnson', username: 'alicejohnson', password: 'password3' }
+                ];
+                users.forEach(user => {
+                    db.query('INSERT INTO Users (name, username, password) VALUES (?, ?, ?)', [user.name, user.username, user.password], (err, result) => {
+                        if (err) {
+                            console.error('Error inserting into Users table:', err);
+                            // You might want to handle duplicate entry errors gracefully here
+                        } else {
+                            console.log('Inserted into Users table:', user.username);
+                        }
+                    });
+                });
             });
 
             // Create Clients table if it does not exist
@@ -47,6 +64,25 @@ function initializeDatabase() {
                     throw err;
                 }
                 console.log('Clients table created or already exists');
+
+                // Insert sample data into Clients table
+                const clients = [
+                    { account_number: '001', surname: 'Smith', name: 'John', middle_name: 'A', date_of_birth: '1980-01-01', tin: '123456789', responsible_full_name: 'John Doe', status: 'Not in work' },
+                    { account_number: '002', surname: 'Doe', name: 'Jane', middle_name: 'B', date_of_birth: '1990-02-02', tin: '234567890', responsible_full_name: 'Jane Smith', status: 'Not in work' },
+                    { account_number: '003', surname: 'Johnson', name: 'Alice', middle_name: 'C', date_of_birth: '2000-03-03', tin: '345678901', responsible_full_name: 'Alice Johnson', status: 'Not in work' },
+                    { account_number: '004', surname: 'Williams', name: 'Bob', middle_name: 'D', date_of_birth: '1970-04-04', tin: '456789012', responsible_full_name: 'John Doe', status: 'Not in work' },
+                    { account_number: '005', surname: 'Brown', name: 'Charlie', middle_name: 'E', date_of_birth: '1960-05-05', tin: '567890123', responsible_full_name: 'Jane Smith', status: 'Not in work' }
+                ];
+                clients.forEach(client => {
+                    db.query('INSERT INTO Clients (account_number, surname, name, middle_name, date_of_birth, tin, responsible_full_name, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [client.account_number, client.surname, client.name, client.middle_name, client.date_of_birth, client.tin, client.responsible_full_name, client.status], (err, result) => {
+                        if (err) {
+                            console.error('Error inserting into Clients table:', err);
+                            // You might want to handle duplicate entry errors gracefully here
+                        } else {
+                            console.log('Inserted into Clients table:', client.account_number);
+                        }
+                    });
+                });
             });
         });
     });
