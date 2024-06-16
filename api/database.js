@@ -71,7 +71,8 @@ function initializeDatabase() {
                     { account_number: '002', surname: 'Doe', name: 'Jane', middle_name: 'B', date_of_birth: '1990-02-02', tin: '234567890', responsible_full_name: 'Jane Smith', status: 'Not in work' },
                     { account_number: '003', surname: 'Johnson', name: 'Alice', middle_name: 'C', date_of_birth: '2000-03-03', tin: '345678901', responsible_full_name: 'Alice Johnson', status: 'Not in work' },
                     { account_number: '004', surname: 'Williams', name: 'Bob', middle_name: 'D', date_of_birth: '1970-04-04', tin: '456789012', responsible_full_name: 'John Doe', status: 'Not in work' },
-                    { account_number: '005', surname: 'Brown', name: 'Charlie', middle_name: 'E', date_of_birth: '1960-05-05', tin: '567890123', responsible_full_name: 'Jane Smith', status: 'Not in work' }
+                    { account_number: '005', surname: 'Brown', name: 'Charlie', middle_name: 'E', date_of_birth: '1960-05-05', tin: '567890123', responsible_full_name: 'Jane Smith', status: 'Not in work' },
+                    { account_number: '006', surname: 'Brady', name: 'Tom', middle_name: 'Goat', date_of_birth: '1977-08-03', tin: '000000000', responsible_full_name: 'Jane Smith', status: 'Not in work' }
                 ];
                 clients.forEach(client => {
                     db.query('INSERT INTO Clients (account_number, surname, name, middle_name, date_of_birth, tin, responsible_full_name, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [client.account_number, client.surname, client.name, client.middle_name, client.date_of_birth, client.tin, client.responsible_full_name, client.status], (err, result) => {
